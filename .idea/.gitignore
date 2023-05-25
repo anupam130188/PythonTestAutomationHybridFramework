@@ -2,3 +2,7 @@
 /shelf/
 /workspace.xml
 report.html
+.idea/
+.pytest_cache/
+*.log
+*__pycache__
