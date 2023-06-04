@@ -1,5 +1,4 @@
 import time
-
 import pytest as pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -9,7 +8,8 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 @pytest.fixture(autouse=True)
-def setup(request,browser): #this makes the value present as paramater to be used by the calling class. in this case we are instantiating driver
+#def setup(request,browser): #this makes the value present as paramater to be used by the calling class. in this case we are instantiating driver
+def setup(request,browser):
      if browser=="chrome":
         option = Options()
         option.add_argument("--disable-infobars")
@@ -30,10 +30,6 @@ def setup(request,browser): #this makes the value present as paramater to be use
 
 def pytest_addoption(parser):
           parser.addoption("--browser")
-
-     # @pytest.fixture(scope="class",autouse=True)
-     # def browser(request):
-     #      return request.config.getoption("--browser")
 
 @pytest.fixture(scope="session",autouse=True)
 def browser(request):

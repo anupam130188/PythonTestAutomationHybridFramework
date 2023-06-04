@@ -3,7 +3,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.search_page import SearchFlightResults
-from utilities.Utilities import Utils
+from utilities.utils import Utils
 
 class LaunchPage(BaseDriver):
     def __init__(self,driver):
@@ -27,21 +27,28 @@ class LaunchPage(BaseDriver):
         return self.wait_element_to_be_clickable(By.XPATH, self.DEPART_FROM)
 
     def departfromibibo(self,departfrom):
+        print("entered departfromibibo field")
+        time.sleep(5)
         self.jsclick_element(By.XPATH,self.CLICK_POPUP)
+
+        #self.driver.refresh()
+        time.sleep(5)
         self.getDepartFieldFrom().click()
-        self.getDepartFrom().send_keys(departfrom)
+        self.getDepartFrom().send_keys("BOM")
+        #self.getDepartFrom().send_keys(departfrom)
         self.getDepartFrom().send_keys(Keys.ENTER)
 
     def goingtoibibo(self,goingto):
         self.getGoingTo().click()
-        self.getGoingTo().send_keys(goingto)
+        #self.getGoingTo().send_keys(goingto)
+        self.getGoingTo().send_keys("New Delhi")
         self.getGoingTo().send_keys(Keys.ENTER)
 
 
     def selectdateibibo(self, selectdate):
         self.wait_element_to_be_clickable(By.XPATH, "//div[@class='DayPicker']").click()
-        all_dates = self.wait_element_to_be_clickable(By.XPATH, "//div[contains(text(),'May 2023')]/ancestor::div[@class='DayPicker-Month']//div[@class='DayPicker-Day']") \
-            .find_elements(By.XPATH, "//div[contains(text(),'May 2023')]/ancestor::div[@class='DayPicker-Month']//div[@class='DayPicker-Day']")
+        all_dates = self.wait_element_to_be_clickable(By.XPATH, "//div[contains(text(),'June 2023')]/ancestor::div[@class='DayPicker-Month']//div[@class='DayPicker-Day']") \
+            .find_elements(By.XPATH, "//div[contains(text(),'June 2023')]/ancestor::div[@class='DayPicker-Month']//div[@class='DayPicker-Day']")
         self.log.info(str(all_dates))
         for date in all_dates:
             self.log.info(date)

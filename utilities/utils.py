@@ -2,6 +2,9 @@ import re
 import logging
 import csv
 
+import pytest
+
+
 class Utils():
 
     def assertListItemsText(self, stopsList,expectedVal):
@@ -14,11 +17,12 @@ class Utils():
         logger= logging.getLogger(__name__)
         logger.setLevel(loglevel)
         ch=logging.StreamHandler()
-        fh = logging.FileHandler("executionlog.log")
+        fh = logging.FileHandler("execution.log", )
         formatter=logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         logger.addHandler(ch)
         logger.addHandler(fh)
         return logger
+
 
     def read_data_from_csv(filename):
         datalist=[]
@@ -27,7 +31,7 @@ class Utils():
         next(reader) #Skip header
         for rows in reader:
             datalist.append(rows)
-        print(datalist)
+        print("values are ",str(datalist)[1:-1])
         return datalist
 
 
